@@ -1,6 +1,7 @@
 import restify from "restify";
 import jwt from 'jsonwebtoken';
 import config from './config';
+import User from "./controllers/User";
 
 const server = restify.createServer();
 const PORT = process.env['PORT'] || 8081;
@@ -25,7 +26,7 @@ server.use(function (request, response, next) {
       if(err) {
         response.send(403, {
           success: false,
-          message: 'Please register Log in using a valid email to submit posts'
+          message: 'Please Log in using a valid email to submit posts'
         });
         next();
       } else {
@@ -37,6 +38,8 @@ server.use(function (request, response, next) {
     next();
   }
 });
+
+User(server);
 
 server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
