@@ -1,12 +1,12 @@
-import {findUserByEmail} from "../repositories/UserRepository";
+import {findUserByUsername} from "../repositories/UserRepository";
 import bcrypt from 'bcrypt-nodejs';
 
-export async function authenticate(email, password) {
-  const user = await findUserByEmail(email);
+export async function authenticate(username, password) {
+  const user = await findUserByUsername(username);
   if(user) {
-    const encryptedPassword = user.userPassword;
+    const encryptedPassword = user.password;
     if(bcrypt.compareSync(password, encryptedPassword)) {
-      console.log('Login successful');
+      console.log('Login successful aaa');
       return user;
     }
   }

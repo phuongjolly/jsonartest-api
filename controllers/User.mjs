@@ -3,12 +3,12 @@ import jwt from 'jsonwebtoken';
 import config from '../config';
 
 export async function login(req, res, next) {
-  let {email, password} = req.body;
-  const data = await authenticate(email, password);
+  let {username, password} = req.body;
+  const data = await authenticate(username, password);
 
   if(data) {
     const user = {
-      userEmail: data.userEmail,
+      username: data.username,
     };
 
     let token = jwt.sign(user, config.jwt.secret, {
@@ -26,7 +26,9 @@ export async function login(req, res, next) {
     });
 
   } else {
-    res.send(400, 'Login failed');
+    res.send(400, {
+      message: 'Login failed!'
+    });
   }
 
   next();
