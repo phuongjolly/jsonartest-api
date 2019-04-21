@@ -35,6 +35,19 @@ export async function login(req, res, next) {
 
 }
 
+/**
+ * get current user from token
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<User>}
+ */
+async function getUserFromToken(req, res, next) {
+  res.send(req.currentUser);
+  next();
+}
+
 export default function User(server) {
   server.post('/api/v1/login', login);
+  server.get('/api/v1/users/me', getUserFromToken);
 }

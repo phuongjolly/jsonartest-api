@@ -12,3 +12,4 @@ export async function authenticate(username, password) {
   }
   return null;
 }
+
