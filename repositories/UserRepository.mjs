@@ -5,17 +5,22 @@ import {runQuery} from "./Connection";
  * @param email
  * @returns {Promise<User>}
  */
-export async function findUserByEmail(email) {
-  const users = await runQuery(`select * from users where userEmail=?`, [email]);
+export async function findUserByUsername(username) {
+  const users = await runQuery(`select * from users where username=?`, [username]);
 
   return users && users[0];
 }
 
-export async function addUser(email, password) {
-  const user = await findUserByEmail(email);
+/**
+ * Add new User
+ * @param username
+ * @param password
+ * @returns {Promise<*[User]>}
+ */
+export async function addUser(username, password) {
+  const user = await findUserByUsername(username);
   if(!user) {
-    console.log('start adding new user', email, password);
-    return await runQuery(`insert into users (userEmail, userPassword) values (?, ?)`,
-      [email, password]);
+    return await runQuery(`insert into users (username, password) values (?, ?)`,
+      [username, password]);
   }
 }

@@ -20,5 +20,7 @@ export default async function getConnection() {
  */
 export async function runQuery(query, parameters) {
   const connection = await getConnection();
-  return connection.query(query, parameters);
+  const result = await connection.query(query, parameters);
+  connection.destroy();
+  return result;
 }

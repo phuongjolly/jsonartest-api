@@ -2,6 +2,8 @@ import restify from "restify";
 import jwt from 'jsonwebtoken';
 import config from './config';
 import User from "./controllers/User";
+import Customer from "./controllers/Customer";
+import Order from "./controllers/Order";
 
 const server = restify.createServer();
 const PORT = process.env['PORT'] || 8081;
@@ -22,6 +24,8 @@ server.use(function (request, response, next) {
     const authorization = request.headers.authorization;
     const token = authorization != null ? authorization.substr(7) : null;
 
+    console.log(token);
+
     jwt.verify(token, config.jwt.secret, function (err, user) {
       if(err) {
         response.send(403, {
@@ -40,6 +44,8 @@ server.use(function (request, response, next) {
 });
 
 User(server);
+Customer(server);
+Order(server);
 
 server.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
