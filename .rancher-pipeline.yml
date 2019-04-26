@@ -5,6 +5,8 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: sonar-api
+      pushRemote: true
+      registry: 127.0.0.1:34769
 - name: deploy
   steps:
   - applyYamlConfig:
