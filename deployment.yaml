@@ -1,6 +1,7 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
+  generation: 2
   labels:
     cattle.io/creator: norman
     workload.user.cattle.io/workloadselector: deployment-beta-sonar-api
@@ -19,12 +20,15 @@ spec:
       maxUnavailable: 0
     type: RollingUpdate
   template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-beta-sonar-api
     spec:
       containers:
         - env:
           - name: MYSQL_HOST
             value: mysql
-        - image: phuongjolly/sonar-website:latest
+          image: phuongjolly/sonar-api
           imagePullPolicy: Always
           name: sonar-api
           resources: {}
