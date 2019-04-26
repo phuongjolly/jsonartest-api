@@ -28,7 +28,7 @@ spec:
         - env:
           - name: MYSQL_HOST
             value: mysql
-          image: phuongjolly/sonar-api
+          image: phuongjolly/sonar-api:latest
           imagePullPolicy: Always
           name: sonar-api
           resources: {}
