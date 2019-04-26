@@ -7,10 +7,10 @@ import mysql from 'promise-mysql';
 export default async function getConnection() {
 
   return mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: 'classicmodels'
+    host: env.process['MYSQL_HOST'] || "localhost",
+    user: env.process['MYSQL_USER'] || "root",
+    password: env.process['MYSQL_PASSWORD'] || "root",
+    database: env.process['MYSQL_DB'] || 'classicmodels'
   });
 }
 
