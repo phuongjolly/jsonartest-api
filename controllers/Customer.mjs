@@ -23,6 +23,22 @@ function getCustomerQuery(query) {
     filter['customerNumber'] = query.customerNumber;
   }
 
+  if(query && query.contactLastName) {
+    if (!filter['contactLastName']) {
+      filter['contactLastName'] = {};
+    }
+
+    filter['contactLastName'] = query.contactLastName;
+  }
+
+  if(query && query.phone) {
+    if (!filter['phone']) {
+      filter['phone'] = {};
+    }
+
+    filter['phone'] = query.phone;
+  }
+
   if(query && query.salesRepEmployeeNumber) {
     if (!filter['salesRepEmployeeNumber']) {
       filter['salesRepEmployeeNumber'] = {};

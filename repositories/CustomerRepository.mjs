@@ -25,6 +25,18 @@ export async function findAllCustomers(filter, page = 0, pageSize = 10) {
     parameters.push(filter.customerNumber);
   }
 
+  if(filter && filter.contactLastName) {
+    query += ' AND contactLastName like ? ';
+    countQuery += ' AND contactLastName like ? ';
+    parameters.push(`%${filter.contactLastName}%`);
+  }
+
+  if(filter && filter.phone) {
+    query += ' AND phone like ? ';
+    countQuery += ' AND phone like ? ';
+    parameters.push(`%${filter.phone}%`);
+  }
+
   if(filter && filter.salesRepEmployeeNumber) {
     query += ' AND salesRepEmployeeNumber = ? ';
     countQuery += ' AND salesRepEmployeeNumber = ? ';
