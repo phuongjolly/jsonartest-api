@@ -4,7 +4,9 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: sonar-api
+      tag: phuongjolly/sonar-api
+      pushRemote: true
+      registry: index.docker.io
 - name: deploy
   steps:
   - applyYamlConfig:
